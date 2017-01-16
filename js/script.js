@@ -328,7 +328,7 @@ $(document).ready(function() {
 
     "use strict";
     
-    var scrollAnimationTime = 1200,
+    var scrollAnimationTime = 800,
         scrollAnimation = 'easeInOutExpo';
     $('a.scrollto').bind('click.smoothscroll', function(event) {
         event.preventDefault();
@@ -342,7 +342,7 @@ $(document).ready(function() {
     //COUNTER
     $('.counter_num').counterUp({
         delay: 10,
-        time: 2000
+        time: 1500
     });
 });
 
@@ -352,7 +352,7 @@ $(document).ready(function() {
 
 
 //VIDEO BACKGROUND
-$(document).ready(function() {
+/*$(document).ready(function() {
   var videobackground = new $.backgroundVideo($('body'), {
     "align": "centerXY",
     "width": 1280,
@@ -361,4 +361,4 @@ $(document).ready(function() {
     "filename": "cloud",
     "types": ["mp4","ogg","webm"]
   });
-});
+});*/
