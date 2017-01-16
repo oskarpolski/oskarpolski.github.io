@@ -253,9 +253,10 @@ $(document).ready(function() {
         
         var name = $("#name").val();
         var emaild = $("#email").val();
-        var subject = $("#subject").val();
-        var message = $("#message").val();
+        var checkbox = $("#payAlpha").is(":checked");
+
         var testEmail = /^[A-Z0-9._%+-]+@([A-Z0-9-]+\.)+[A-Z]{2,4}$/i;
+        $(".Sucess").hide();
         if (!name) {
             $(".form_error .name_error").addClass("show").removeClass("hide");
             return false;
@@ -274,26 +275,34 @@ $(document).ready(function() {
                 return false;
             }
         }
-        if (!message) {
+        /*if (!message) {
             $(".form_error .message_error").addClass("show").removeClass("hide");
             return false;
         } else {
             $(".form_error .message_error").addClass("hide").removeClass("show");
-        }
-        if (name && emaild && message) {
-            $.ajax({
-                url: 'contact.php',
+        }*/
+        //if (name && emaild && message) {
+        if (name && emaild) {
+            $.get("http://ipinfo.io", function(response) {
+                var ip = response.ip;
+                var city = response.city;
+                var country = response.country;
+
+                $.ajax({
+                url: "https://script.google.com/macros/s/AKfycbx_oQtQo9n7g_if1BVTLsgTqSI7UllmwCBeC4RH-wiWLhTWOEU/exec",
                 data: {
                     name: name,
-                    emaild: emaild,
-                    subject: subject,
-                    message: message
+                    email: emaild,
+                    ip: ip,
+                    city: city,
+                    country: country,
+                    payAlpha: checkbox,
                 },
                 type: 'POST',
                 success: function(data) {
                     $(".Sucess").show();
                     $(".Sucess").fadeIn(2000);
-                    $(".Sucess").html("<i class='fa fa-check'></i> Dear <b>" + name + "</b> Thank you for your inquiry we will respond to you as soon as possible!");
+                    $(".Sucess").html("<i class='fa fa-check'></i> Dear <b>" + name + "</b> Thank you for signing up for Limitless Laptop alpha! We will get in touch with you about the details in the upcoming months.");
                     $("#Name").val("");
                     $("#Email").val("");
                     $("#Subject").val("");
@@ -305,6 +314,7 @@ $(document).ready(function() {
                     $("#message").val("");
                 }
             });
+            }, "jsonp");
         }
         return false;
     });
